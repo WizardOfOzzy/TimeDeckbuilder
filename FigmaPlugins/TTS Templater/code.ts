@@ -12,6 +12,7 @@ const eras: string[] = [
   "Curse"
 ]
 
+const MAX_COLUMNS = 10;
 const CARD_WIDTH = 825;
 const CARD_HEIGHT = 1125;
 
@@ -31,7 +32,6 @@ async function CreateTTSLayout()
   
     // Start iterating through all of the cards on the template page
     let cardIndex = 0;
-    const maxColumns = 10;
 
     // Iterate through the children of the template page
     // These should be the individual cards
@@ -50,8 +50,8 @@ async function CreateTTSLayout()
           // Create clones, place them on the template
           for (let i = 0; i < rarityNumber; i++) {
             const clone = cardTemplateComponent.clone();
-            const col = cardIndex % maxColumns;
-            const row = Math.floor(cardIndex / maxColumns);
+            const col = cardIndex % MAX_COLUMNS;
+            const row = Math.floor(cardIndex / MAX_COLUMNS);
             clone.x = col * CARD_WIDTH;
             clone.y = row * CARD_HEIGHT;
             currentPage.appendChild(clone);
@@ -102,6 +102,22 @@ function GetRarityValue(card : ComponentNode) : number {
   }
 
   return rarityNumber;
+}
+
+function CreateEraFrame(frameName: string) : FrameNode {
+  const gridFrame = figma.createFrame();
+  gridFrame.name = frameName;
+  gridFrame.layoutMode = "NONE";
+  figma.currentPage.appendChild(gridFrame);
+  return gridFrame;
+}
+
+function ResizeEraFrame(eraFrame: FrameNode, numCards : number) {
+  const columns = Math.max(numCards, MAX_COLUMNS);
+  const rows = Math.ceil(numCards / MAX_COLUMNS);
+  const width = columns * CARD_WIDTH;
+  const height = rows * CARD_HEIGHT;
+  eraFrame.resize(width, height);
 }
 
 
