@@ -19,6 +19,8 @@ const CARD_WIDTH = 825;
 const CARD_HEIGHT = 1125;
 const ERA_FRAME_SPLIT_DIST = 825;
 
+// Entrypoint
+console.clear();
 CreateTTSLayout();
 
 async function CreateTTSLayout()
@@ -112,16 +114,14 @@ function PopulateAllEraGrids() {
   // For all eras in our list...
   for (let i = 0; i < eraNameList.length; i++) {
     let curEra = eraNameList[i];
-    let numCards = eraDict[curEra].length;
-
     // Create and populate the era grid
     const currentFrame = CreateEraFrame(curEra);
-    PopulateEraGrid(currentFrame, eraDict[curEra]);
+    let numCards = PopulateEraGrid(currentFrame, eraDict[curEra]);
 
     // Finish by re-sizing and placing the frame, then prepping for next one
     ResizeEraFrame(currentFrame, numCards);
     currentFrame.x = nextFrameXPos;
-    nextFrameXPos = currentFrame.width + ERA_FRAME_SPLIT_DIST;
+    nextFrameXPos += currentFrame.width + ERA_FRAME_SPLIT_DIST;
   }
 }
 
@@ -129,11 +129,18 @@ function CreateEraFrame(frameName: string) : FrameNode {
   const gridFrame = figma.createFrame();
   gridFrame.name = frameName + " Deck";
   gridFrame.layoutMode = "NONE";
+  gridFrame.fills = [
+    {
+      type: "SOLID",
+      color: { r: 0, g: 0, b: 0 }
+    }
+  ];
   figma.currentPage.appendChild(gridFrame);
   return gridFrame;
 }
 
-function PopulateEraGrid(frameGrid : FrameNode, cardComponents : ComponentNode[]) {
+function PopulateEraGrid(frameGrid : FrameNode, cardComponents : ComponentNode[]) : number {
+  let cardCount = 0;
   for (let i = 0; i < cardComponents.length; i++) {
     const curCard = cardComponents[i];
     const rarityNumber = GetRarityValue(curCard);
@@ -146,17 +153,19 @@ function PopulateEraGrid(frameGrid : FrameNode, cardComponents : ComponentNode[]
       for (let j = 0; j < rarityNumber; j++) {
         const clone = curCard.clone();
         frameGrid.appendChild(clone);
-        const col = i % MAX_COLUMNS;
-        const row = Math.floor(i / MAX_COLUMNS);
+        const col = cardCount % MAX_COLUMNS;
+        const row = Math.floor(cardCount / MAX_COLUMNS);
         clone.x = col * CARD_WIDTH;
         clone.y = row * CARD_HEIGHT;
+        cardCount++;
       }
     }
   }
+  return cardCount;
 }
 
 function ResizeEraFrame(eraFrame: FrameNode, numCards : number) {
-  const columns = Math.max(numCards, MAX_COLUMNS);
+  const columns = Math.min(numCards, MAX_COLUMNS);
   const rows = Math.ceil(numCards / MAX_COLUMNS);
   const width = columns * CARD_WIDTH;
   const height = rows * CARD_HEIGHT;
