@@ -1,0 +1,1 @@
+Add both TS_Save_3 files to This PC/Documents/My Games/ Tabletop Simulator/Saves, should be able to Load In.
