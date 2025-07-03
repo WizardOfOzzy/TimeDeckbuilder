@@ -10,7 +10,12 @@ let keywords: string[] = [
   "Reaction:", 
   "Instant:",
   "Synced:",
-  "Erase"];
+  "Erase",
+  "Discard",
+  "Block",
+  "Swap",
+  "Duplicate",
+  "Unblockable"]; 
 
 const regularFont = {family: "Inter", style: "Regular"};
 const boldFont = {family: "Inter", style: "Bold"};
