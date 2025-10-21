@@ -5,17 +5,43 @@
 // - Are there situations we do not want a keyword bolded?
 
 let keywords: string[] = [
-  "Ability:", 
+  "Ability:",
+  "Ability",
   "On Sync:", 
   "Reaction:", 
-  "Instant:",
+  "Arrival:",
+  "Arrival",
+  "Action",
   "Synced:",
   "Erase",
-  "Discard",
   "Block",
   "Swap",
   "Duplicate",
-  "Unblockable"]; 
+  "Unblockable",
+  "Fragment",
+  "Fragments",
+  "Past Fragment",
+  "Past Fragments",
+  "Present Fragment",
+  "Present Fragments",
+  "Future Fragment",
+  "Future Fragments",
+  "Timeline",
+  "Timelines",
+  "Partial Timeline",
+  "Completed Timeline",
+  "Era Market",
+  "Era Markets",
+  "Sync",
+  "Glitch",
+  "Anomaly",
+  "+1 Energy",
+  "+2 Energy",
+  "+3 Energy",
+  "+X Energy",
+  "Energy",
+  "Retain",
+]; 
 
 const regularFont = {family: "Inter", style: "Regular"};
 const boldFont = {family: "Inter", style: "Bold"};
