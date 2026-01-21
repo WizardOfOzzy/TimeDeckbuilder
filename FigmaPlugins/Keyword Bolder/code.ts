@@ -41,6 +41,8 @@ let keywords: string[] = [
   "+X Energy",
   "Energy",
   "Retain",
+  "Travel",
+  "Rewind"
 ]; 
 
 const regularFont = {family: "Inter", style: "Regular"};
