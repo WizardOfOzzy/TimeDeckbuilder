@@ -1,3 +1,6 @@
+/// <reference types="@figma/plugin-typings" />
+
+
 // This plugin creates the TTS layout based on existing cards on the Card Grid Page
 const eraNameList: string[] = [
   "Past",

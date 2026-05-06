@@ -4,6 +4,8 @@
 // - Dynamically load the font we're using from the page, instead of assuming Inter
 // - Are there situations we do not want a keyword bolded?
 
+/// <reference types="@figma/plugin-typings" />
+
 let keywords: string[] = [
   "Ability:",
   "Ability",
@@ -43,7 +45,9 @@ let keywords: string[] = [
   "Energy",
   "Retain",
   "Travel",
-  "Rewind"
+  "Rewind",
+  "Before Travel",
+  "After Travel",
 ]; 
 
 const regularFont = {family: "Inter", style: "Regular"};
